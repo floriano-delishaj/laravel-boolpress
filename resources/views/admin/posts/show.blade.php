@@ -11,9 +11,15 @@
 
                     <div class="card-body">
 
-                       {{ $post->content }}
+                     {{ $post->content }}
 
                     </div>
+                    <form class="ms-auto" action="{{ route('admin.posts.destroy', $post->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-link" type="submit">Delete</button>
+                    </form>
+
                 </div>
             </div>
         </div>

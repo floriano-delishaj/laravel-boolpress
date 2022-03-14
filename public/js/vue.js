@@ -117,9 +117,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -677,15 +674,7 @@ var staticRenderFns = [
                     _c(
                       "a",
                       { staticClass: "nav-link", attrs: { href: "/login" } },
-                      [_vm._v("Login")]
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "nav-item" }, [
-                    _c(
-                      "a",
-                      { staticClass: "nav-link", attrs: { href: "/register" } },
-                      [_vm._v("Register")]
+                      [_vm._v("Admin")]
                     ),
                   ]),
                 ]),

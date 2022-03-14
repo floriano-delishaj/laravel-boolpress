@@ -107,9 +107,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('admin.posts.index');
     }
 
     protected function generateUniqueSlug($postTitle)
@@ -124,9 +126,9 @@ class PostController extends Controller
         // Fintanto che $exists ha un valore diverso da null o false,
         // eseguo il while
         while ($exists) {
-            // Genero un nuovo slug, prendendo quello precedente e concatenando un numero incrementale
-            $newSlug = $slug . "-" . $counter;
-            $counter++;
+                // Genero un nuovo slug, prendendo quello precedente e concatenando un numero incrementale
+                $newSlug = $slug . "-" . $counter;
+                $counter++;
 
             // controllo a db se esiste già un elemento con i nuovo slug appena generato
             $exists = Post::where("slug", $newSlug)->first();
