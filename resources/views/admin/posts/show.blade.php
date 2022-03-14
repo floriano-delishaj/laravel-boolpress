@@ -6,12 +6,12 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header d-flex">
-                        Dettagli post {{ $post->title }}
+                        Dettagli post {{$post->title}}
                     </div>
 
                     <div class="card-body">
 
-                        {{ $post->content }}
+                       {{ $post->content }}
 
                     </div>
                 </div>
