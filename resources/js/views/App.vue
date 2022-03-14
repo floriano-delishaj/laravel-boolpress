@@ -1,14 +1,20 @@
 <template>
     <div>
-        <ExampleComponentVue></ExampleComponentVue>
+        <TheNavBar />
     </div>
 </template>
 
 <script>
-import ExampleComponentVue from "../components/ExampleComponent.vue";
+
+import TheNavBar from "../components/TheNavBar.vue";
+
 export default {
-    components: { ExampleComponentVue },
+    components: {
+        TheNavBar,
+    },
 };
 </script>
 
-<style></style>
+<style>
+
+</style>
