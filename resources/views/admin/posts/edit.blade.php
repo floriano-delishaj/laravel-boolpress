@@ -6,11 +6,10 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header d-flex">
-                        Aggiunta di un nuovo post
+                        Edit di un post
                     </div>
-
                     <div class="card-body">
-                        <form action="{{ route('admin.posts.update', $post->id) }}" method="post">
+                        <form action="{{ route('admin.posts.update', ['post' => $post->slug]) }}" method="post">
                             @csrf
                             @method("patch")
 
@@ -34,6 +33,17 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3">
+                                <label>Categoria</label>
+                                <select name="category_id" class="form-select">
+                                    <option value="">-- nessuna categoria --</option>
+                                    @foreach ($categories as $category)
+
+                                        <option value="{{ $category->id }}" @if (old('category_id') === $category->id) selected @endIf>
+                                            {{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
                             <div class="form-group">
                                 <a href="{{ route('admin.posts.show', $post->slug) }}" class="btn btn-secondary">Annulla</a>

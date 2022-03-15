@@ -14,7 +14,9 @@
                     <div class="card-body">
                         <ul class="list-group">
                             @foreach ($posts as $post)
-                                <li class="list-group-item">{{$post->title}}
+                                <li class="list-group-item d-flex justify-content-between">
+                                    {{$post->title}}
+                                    <span>Autore: {{$post->user->name}}</span>
                                     <a href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
                                 </li>
                             @endforeach

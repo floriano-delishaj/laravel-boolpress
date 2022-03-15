@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Category;
 use App\Post;
 use Illuminate\Support\Str;
 
@@ -17,6 +18,8 @@ class PostController extends Controller
      */
     public function index()
     {
+        //per avere i risultati solo dei post dell'utente loggato
+        //$posts = Post::where("user_id", Auth::user()->id)->get();;
         $posts = Post::all();
 
         return view('admin.posts.index', compact('posts'));
@@ -29,7 +32,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -42,7 +47,8 @@ class PostController extends Controller
     {
         $data = $request->validate([
             "title" => "required|min:5",
-            "content" => "required|min:10"
+            "content" => "required|min:10",
+            "category_id" => 'nullable',
         ]);
 
         $post = new Post();
@@ -78,8 +84,9 @@ class PostController extends Controller
     public function edit($slug)
     {
         $post = Post::where("slug", $slug)->first();
+        $categories = Category::all();
 
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.posts.edit', compact('post','categories'));
     }
 
     /**
@@ -89,20 +96,23 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $slug)
     {
         $data = $request->validate([
             "title" => "required|min:5",
-            "content" => "required|min:10"
+            "content" => "required|min:10",
+            "category_id" => 'nullable',
         ]);
 
-        if($data->title !== $post->title) {
-            $data->slug = $this->generateUniqueSlug($data->title);
+        $post = Post::where("slug", $slug)->first();
+
+        if($data['title'] !== $post->title) {
+            $data['slug'] = $this->generateUniqueSlug($data['title']);
         }
 
         $post->update($data);
 
-        return redirect()->route('admin.posts.show', $post->slug);
+        return redirect()->route('admin.posts.show', ['post' => $post->slug]);
     }
 
     /**
