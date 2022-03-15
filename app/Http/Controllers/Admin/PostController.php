@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Post;
 use Illuminate\Support\Str;
@@ -48,6 +49,7 @@ class PostController extends Controller
         $post->fill($data);
 
         $post->slug = $this->generateUniqueSlug($post->title);
+        $post->user_id = Auth::user()->id;
 
         $post->save();
 
@@ -73,9 +75,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $post = Post::where("slug", $slug)->first();
+
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -98,7 +102,7 @@ class PostController extends Controller
             $data->slug = $this->generateUniqueSlug($data->title);
         }
 
-        return redirect()->route('admin.posts.show', $post->id);
+        return redirect()->route('admin.posts.show', $post->slug);
     }
 
     /**

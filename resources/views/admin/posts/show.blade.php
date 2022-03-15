@@ -14,11 +14,15 @@
                      {{ $post->content }}
 
                     </div>
-                    <form class="ms-auto" action="{{ route('admin.posts.destroy', $post->id) }}" method="post">
-                        @csrf
-                        @method('delete')
-                        <button class="btn btn-link" type="submit">Delete</button>
-                    </form>
+                    <div class="d-flex class="ms-auto"">
+                        <a class="btn btn-link" href="{{route('admin.posts.edit', $post->slug)}}">Edit</a>
+                        <form action="{{ route('admin.posts.destroy', $post->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-link" type="submit">Delete</button>
+                        </form>
+                    </div>
+
 
                 </div>
             </div>
