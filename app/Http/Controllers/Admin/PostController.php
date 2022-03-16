@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Post;
+use App\Tag;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -33,8 +34,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -49,6 +51,7 @@ class PostController extends Controller
             "title" => "required|min:5",
             "content" => "required|min:10",
             "category_id" => 'nullable',
+            "tags" => 'nullable',
         ]);
 
         $post = new Post();
@@ -58,6 +61,8 @@ class PostController extends Controller
         $post->user_id = Auth::user()->id;
 
         $post->save();
+
+        $post->tags()->attach($data['tags']);
 
         return redirect()->route('admin.posts.index');
     }
@@ -79,14 +84,19 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit($slug)
     {
         $post = Post::where("slug", $slug)->first();
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.edit', compact('post','categories'));
+        return view('admin.posts.edit', [
+            'post' => $post,
+            'categories' => $categories,
+            'tags' => $tags,
+        ]);
     }
 
     /**
@@ -102,6 +112,7 @@ class PostController extends Controller
             "title" => "required|min:5",
             "content" => "required|min:10",
             "category_id" => 'nullable',
+            "tags" => "nullable|exist:tags,id"
         ]);
 
         $post = Post::where("slug", $slug)->first();
@@ -111,6 +122,10 @@ class PostController extends Controller
         }
 
         $post->update($data);
+
+        if(key_exists("tags", $data)) {
+            $post->tags()->sync($data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', ['post' => $post->slug]);
     }
@@ -123,6 +138,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->tags()->detach();
         $post->delete();
 
         return redirect()->route('admin.posts.index');

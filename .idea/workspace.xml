@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="review update in Admin\PostController.php">
-      <change afterPath="$PROJECT_DIR$/app/Category.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2022_03_15_160515_create_categories_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2022_03_15_163537_add_category_id_in_posts_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeds/CategoriesSeeder.php" afterDir="false" />
+    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="fix update in Admin\PostController.php and add Categories">
+      <change afterPath="$PROJECT_DIR$/app/Tag.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2022_03_16_154445_create_tags_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2022_03_16_154813_create_post_tag_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/TagsSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Post.php" afterDir="false" />
@@ -188,7 +188,10 @@
       <updated>1647275893247</updated>
       <workItem from="1647275894993" duration="6918000" />
       <workItem from="1647338737360" duration="355000" />
-      <workItem from="1647340346418" duration="9897000" />
+      <workItem from="1647340346418" duration="10359000" />
+      <workItem from="1647364640555" duration="1257000" />
+      <workItem from="1647421599271" duration="2567000" />
+      <workItem from="1647445405029" duration="2614000" />
     </task>
     <task id="LOCAL-00001" summary="review function show in Admin/PostController and show.blade.php">
       <created>1647278532681</created>
@@ -225,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647358615822</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix update in Admin\PostController.php and add Categories">
+      <created>1647364401975</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1647364401975</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,6 +260,7 @@
     <MESSAGE value="fix function show in Admin/PostController and show.blade.php" />
     <MESSAGE value="add button delete in show.blade.php" />
     <MESSAGE value="review update in Admin\PostController.php" />
-    <option name="LAST_COMMIT_MESSAGE" value="review update in Admin\PostController.php" />
+    <MESSAGE value="fix update in Admin\PostController.php and add Categories" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix update in Admin\PostController.php and add Categories" />
   </component>
 </project>

@@ -15,6 +15,9 @@
                         <ul class="list-group">
                             @foreach ($posts as $post)
                                 <li class="list-group-item d-flex justify-content-between">
+                                <!--@if ($post->category !== null)
+                                        {{$post->category->name}}
+                                            @endif-->
                                     {{$post->title}}
                                     <span>Autore: {{$post->user->name}}</span>
                                     <a href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>

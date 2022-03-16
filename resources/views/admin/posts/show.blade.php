@@ -16,13 +16,22 @@
                     <div>
                         <ul class="list-group">
                             <li class="list-group-item">
-                                Creato il <i>{{$post->created_at}}</i>
+                                <p>Creato il <i>{{$post->created_at}}</i></p>
+                                <p>Modificato il <i>{{$post->updated_at}}</i></p>
                             </li>
                             @if ($post->category !== null)
                             <li class="list-group-item">
                                 Categoria: <b>{{$post->category->name}}</b>
                             </li>
                                 @endif
+                            @if ($post->tags !== null)
+                            <li class="list-group-item">
+                                Tags:
+                                @foreach($post->tags as $tag)
+                                    <span class="fw-bold">{{$tag->name}}, </span>
+                                @endforeach
+                            </li>
+                            @endif
                         </ul>
                     </div>
                         <div class="d-flex">
