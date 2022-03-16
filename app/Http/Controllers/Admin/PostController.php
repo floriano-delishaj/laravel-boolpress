@@ -112,7 +112,7 @@ class PostController extends Controller
             "title" => "required|min:5",
             "content" => "required|min:10",
             "category_id" => 'nullable',
-            "tags" => "nullable|exist:tags,id"
+            "tags" => "nullable|exists:tags,id"
         ]);
 
         $post = Post::where("slug", $slug)->first();
