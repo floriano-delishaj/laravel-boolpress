@@ -62,7 +62,9 @@ class PostController extends Controller
 
         $post->save();
 
-        $post->tags()->attach($data['tags']);
+        if(key_exists("tags", $data)) {
+            $post->tags()->attach($data['tags']);
+        }
 
         return redirect()->route('admin.posts.index');
     }
@@ -125,6 +127,8 @@ class PostController extends Controller
 
         if(key_exists("tags", $data)) {
             $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->detach();
         }
 
         return redirect()->route('admin.posts.show', ['post' => $post->slug]);
@@ -163,7 +167,7 @@ class PostController extends Controller
             // controllo a db se esiste già un elemento con i nuovo slug appena generato
             $exists = Post::where("slug", $newSlug)->first();
 
-            // Se non esiste, salvo il nuovo slug nella variabile $slub che verrà poi usata
+            // Se non esiste, salvo il nuovo slug nella variabile $slug che verrà poi usata
             // per assegnare il valore all'interno del nuovo post.
             if (!$exists) {
                 $slug = $newSlug;

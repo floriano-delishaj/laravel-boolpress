@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header d-flex">
-                        Dettagli post {{$post->title}}
+                        <a class="mx-2" href="{{route('admin.posts.index')}}"><b> < </b></a> Dettagli post {{$post->title}}
                     </div>
 
                     <div class="card-body">
@@ -16,22 +16,27 @@
                     <div>
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <p>Creato il <i>{{$post->created_at}}</i></p>
-                                <p>Modificato il <i>{{$post->updated_at}}</i></p>
+                                <p>Creato il <i>{{$post->created_at->format('d/m/Y H:i')}}</i></p>
+                                @if($post->updated_at->diffInHours(date(0)) <= 12)
+                                    <p>Modificato <i>{{$post->updated_at->diffForHumans(date(0)) }}</i></p>
+                                    @else <p>Modificato <i>{{$post->updated_at->format('d/m/Y H:i')}}</i></p>
+                                @endif
                             </li>
                             @if ($post->category !== null)
                             <li class="list-group-item">
-                                Categoria: <b>{{$post->category->name}}</b>
-                            </li>
-                                @endif
-                            @if ($post->tags !== null)
-                            <li class="list-group-item">
-                                Tags:
-                                @foreach($post->tags as $tag)
-                                    <span class="fw-bold">{{$tag->name}}, </span>
-                                @endforeach
+                                Categoria: <span class="badge bg-danger text-white mx-1 mb-3">{{$post->category->name}}</span>
                             </li>
                             @endif
+                            <li class="list-group-item">
+                                Tags:
+                            @forelse ($post->tags as $tag)
+
+                                 <span class="badge bg-success text-white mx-1 mb-3">{{$tag->name}}</span>
+
+                            @empty
+                                <span></span>
+                            @endforelse
+                            </li>
                         </ul>
                     </div>
                         <div class="d-flex">

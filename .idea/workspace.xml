@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="create Tag model, table and seeder and add section tag in forms create,update">
+    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="fix validate array in Admin\PostController function update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/posts/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/posts/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +156,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -181,7 +183,10 @@
       <workItem from="1647340346418" duration="10359000" />
       <workItem from="1647364640555" duration="1257000" />
       <workItem from="1647421599271" duration="2567000" />
-      <workItem from="1647445405029" duration="4606000" />
+      <workItem from="1647445405029" duration="6064000" />
+      <workItem from="1647505858564" duration="1629000" />
+      <workItem from="1647511581100" duration="7254000" />
+      <workItem from="1647529519805" duration="1286000" />
     </task>
     <task id="LOCAL-00001" summary="review function show in Admin/PostController and show.blade.php">
       <created>1647278532681</created>
@@ -232,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647448142352</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix validate array in Admin\PostController function update">
+      <created>1647450156280</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1647450156280</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,6 +271,7 @@
     <MESSAGE value="review update in Admin\PostController.php" />
     <MESSAGE value="fix update in Admin\PostController.php and add Categories" />
     <MESSAGE value="create Tag model, table and seeder and add section tag in forms create,update" />
-    <option name="LAST_COMMIT_MESSAGE" value="create Tag model, table and seeder and add section tag in forms create,update" />
+    <MESSAGE value="fix validate array in Admin\PostController function update" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix validate array in Admin\PostController function update" />
   </component>
 </project>
