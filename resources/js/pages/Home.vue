@@ -6,22 +6,22 @@
         <nav aria-label="pagination card" class="my-5">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link"
-                       @click="$emit('fetchPosts', prevPage)"
+                    <a :class="['page-link', {disabled: pagination.current_page === 1}]"
+                       @click="fetchPosts(prevPage)"
                     >Previous</a>
                 </li>
                 <li aria-current="page"
                     v-for="page in pagination.last_page"
                     :key="page"
-                    :class="['page-item']"
+                    :class="['page-item', {active: pagination.current_page === page}]"
                 >
                     <a class="page-link"
-                       @click="$emit('fetchPosts', page)"
+                       @click="fetchPosts(page)"
                     >{{page}}</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link"
-                       @click="$emit('fetchPosts', nextPage)"
+                    <a :class="['page-link', {disabled: pagination.current_page === pagination.last_page,}]"
+                       @click="fetchPosts(nextPage)"
                     >Next</a>
                 </li>
             </ul>
@@ -30,22 +30,39 @@
 </template>
 
 <script>
-import TheCard from "./TheCard";
+import TheCard from "../components/TheCard";
+
+import axios from "axios";
 
 export default {
     components: {
         TheCard,
     },
-    props: {
-        pagination: Object,
-        posts: Array,
-    },
-    data () {
+    data() {
         return {
-           // prevPage: this.pagination.current_page - 1,
-           // nextPage: this.pagination.current_page + 1,
-            // non si può fare perché c'è l'asyc e await di mezzo
+            posts: [],
+            pagination: {},
         }
+    },
+    methods: {
+        async fetchPosts(page = 1) {
+            if (page < 1)
+            {
+                page = 1;
+            }
+
+            if (page > this.pagination.last_page)
+            {
+                page = this.pagination.last_page;
+            }
+
+            const res = await axios.get('/api/posts?page=' + page);
+            this.pagination = res.data;
+            this.posts = res.data.data;
+        }
+    },
+    mounted() {
+        this.fetchPosts();
     },
     computed: {
         prevPage() {

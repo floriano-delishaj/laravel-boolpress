@@ -19,9 +19,14 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import App from './views/App.vue'
+import App from './views/App.vue';
+import router from './router';
+// se router fosse una variabile avremmo dovuto fare import {router} from './router';
 
 const app = new Vue({
     el: '#app',
-    render: (h) => h(App)
+    render: (h) => h(App),
+    router: router
 });
+
+// al posto di fare router: router potremmo scrivere solo router perché ha chiave valore uguale.

@@ -20,6 +20,10 @@
                             <span class="badge bg-danger text-white mx-1 mb-3">{{tags.name}}</span>
                         </span>
                     </div>
+                    <hr>
+                    <div class="my-3 text-end">
+                        <router-link :to="{ name: 'posts.show', params: { post: post.slug } }">Dettagli</router-link>
+                    </div>
                 </div>
             </div>
         </div>
