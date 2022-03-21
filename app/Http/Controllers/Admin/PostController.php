@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Traits\SlugGenerator;
 use App\Category;
 use App\Post;
 use App\Tag;
@@ -12,6 +13,7 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    use SlugGenerator;
     /**
      * Display a listing of the resource.
      *
@@ -146,34 +148,5 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()->route('admin.posts.index');
-    }
-
-    protected function generateUniqueSlug($postTitle)
-    {
-        // Genero lo slug partendo dal titolo
-        $slug = Str::slug($postTitle);
-
-        // controllo a db se esiste già un elemento con lo stesso slug
-        $exists = Post::where("slug", $slug)->first();
-        $counter = 1;
-
-        // Fintanto che $exists ha un valore diverso da null o false,
-        // eseguo il while
-        while ($exists) {
-                // Genero un nuovo slug, prendendo quello precedente e concatenando un numero incrementale
-                $newSlug = $slug . "-" . $counter;
-                $counter++;
-
-            // controllo a db se esiste già un elemento con i nuovo slug appena generato
-            $exists = Post::where("slug", $newSlug)->first();
-
-            // Se non esiste, salvo il nuovo slug nella variabile $slug che verrà poi usata
-            // per assegnare il valore all'interno del nuovo post.
-            if (!$exists) {
-                $slug = $newSlug;
-            }
-        }
-
-        return $slug;
     }
 }

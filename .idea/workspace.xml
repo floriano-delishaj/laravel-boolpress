@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="fix validate array in Admin\PostController function update">
+    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="format date">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/PostController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Traits/SlugGenerator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/TheCard.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/TheMain.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/posts/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/posts/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/vue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/posts/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/posts/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +164,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -186,7 +194,13 @@
       <workItem from="1647445405029" duration="6064000" />
       <workItem from="1647505858564" duration="1629000" />
       <workItem from="1647511581100" duration="7254000" />
-      <workItem from="1647529519805" duration="1286000" />
+      <workItem from="1647529519805" duration="2211000" />
+      <workItem from="1647593735911" duration="38000" />
+      <workItem from="1647689289238" duration="3715000" />
+      <workItem from="1647694540161" duration="2085000" />
+      <workItem from="1647774794915" duration="4000" />
+      <workItem from="1647802468638" duration="4879000" />
+      <workItem from="1647852036697" duration="919000" />
     </task>
     <task id="LOCAL-00001" summary="review function show in Admin/PostController and show.blade.php">
       <created>1647278532681</created>
@@ -244,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647450156280</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="format date">
+      <created>1647531088450</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1647531088450</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,6 +293,7 @@
     <MESSAGE value="fix update in Admin\PostController.php and add Categories" />
     <MESSAGE value="create Tag model, table and seeder and add section tag in forms create,update" />
     <MESSAGE value="fix validate array in Admin\PostController function update" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix validate array in Admin\PostController function update" />
+    <MESSAGE value="format date" />
+    <option name="LAST_COMMIT_MESSAGE" value="format date" />
   </component>
 </project>
