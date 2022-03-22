@@ -27,14 +27,24 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     data() {
         return {
-            routes: []
+            routes: [],
+            user: null,
+        }
+    },
+    methods: {
+        async fetchUser() {
+            const res = await axios.get('api/user')
+            this.user = res.data;
         }
     },
     mounted() {
         this.routes = this.$router.getRoutes().filter((route) => route.meta.nameLinkNav);
+        this.fetchUser()
     }
 }
 </script>

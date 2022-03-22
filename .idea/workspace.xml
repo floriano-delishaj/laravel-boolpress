@@ -4,21 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="end tasks + bonus">
-      <change afterPath="$PROJECT_DIR$/resources/js/pages/Contacts.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/pages/Error.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/pages/posts/Show.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/router.js" afterDir="false" />
+    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="done (21/03/2022) + all bonus">
+      <change afterPath="$PROJECT_DIR$/resources/js/pages/posts/Create.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/vue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/TheCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/TheCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/TheMain.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/pages/Home.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/TheNavBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/TheNavBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/vue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/pages/posts/Show.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/pages/posts/Show.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -205,7 +199,10 @@
       <workItem from="1647694540161" duration="2085000" />
       <workItem from="1647774794915" duration="4000" />
       <workItem from="1647802468638" duration="4879000" />
-      <workItem from="1647852036697" duration="19162000" />
+      <workItem from="1647852036697" duration="19782000" />
+      <workItem from="1647891928849" duration="8764000" />
+      <workItem from="1647902186582" duration="1396000" />
+      <workItem from="1647938177884" duration="2849000" />
     </task>
     <task id="LOCAL-00001" summary="review function show in Admin/PostController and show.blade.php">
       <created>1647278532681</created>
@@ -277,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647855311085</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="done (21/03/2022) + all bonus">
+      <created>1647884278366</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1647884278366</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,6 +311,7 @@
     <MESSAGE value="fix validate array in Admin\PostController function update" />
     <MESSAGE value="format date" />
     <MESSAGE value="end tasks + bonus" />
-    <option name="LAST_COMMIT_MESSAGE" value="end tasks + bonus" />
+    <MESSAGE value="done (21/03/2022) + all bonus" />
+    <option name="LAST_COMMIT_MESSAGE" value="done (21/03/2022) + all bonus" />
   </component>
 </project>

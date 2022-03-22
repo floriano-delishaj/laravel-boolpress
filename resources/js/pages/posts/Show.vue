@@ -18,10 +18,10 @@
                                         <p>Creato il <i>{{post.created_at}}</i></p>
                                         <p>Modificato <i>{{post.updated_at}}</i></p>
                                     </li>
-                                    <li class="list-group-item" v-if="post.category !== null">
+                                  <li class="list-group-item" v-if="post.category && post.category !== null">
                                         Categoria: <span class="badge bg-danger text-white mx-1 mb-3">{{post.category.name}}</span>
                                     </li>
-                                    <li class="list-group-item" v-if="post.tags.length > 0">
+                                 <li class="list-group-item" v-if="post.tags && post.tags.length > 0">
                                         Tags:
                                         <span class="badge bg-success text-white mx-1 mb-3"
                                               v-for="tag in post.tags"

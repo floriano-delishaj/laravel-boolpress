@@ -4,6 +4,7 @@ import Contacts from "./pages/Contacts";
 import Home from './pages/Home';
 import Error from './pages/Error';
 import PostShow from './pages/posts/Show';
+import PostCreate from './pages/posts/Create';
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,7 @@ const router = new VueRouter({
                     nameLinkNav: 'Home'
                 }
         },
+
         {
             path: '/contacts',
             component: Contacts,
@@ -30,6 +32,18 @@ const router = new VueRouter({
                     nameLinkNav: 'Contacts'
                 }
         },
+
+        {
+            path: '/posts/create',
+            component: PostCreate,
+            name: 'posts.create',
+            meta:
+                {
+                    title: 'Creazione Post',
+                    nameLinkNav: 'Create Post'
+                }
+        },
+
         {
             path: '/posts/:post',
             component: PostShow,
@@ -39,18 +53,7 @@ const router = new VueRouter({
                     title: 'Dettagli Post',
                 }
         },
-        /*{
-            il path entra in conflitto con quello dello show
 
-            path: '/post/create',
-            component: PostCreate,
-            name: 'post.create',
-            meta:
-                {
-                    title: 'Creazione Post',
-                    nameLinkNav: 'Create Post'
-                }
-        },*/
         {
             path: '*',
             component: Error,
@@ -58,7 +61,7 @@ const router = new VueRouter({
 /*            redirect:
                 {
                     name: 'home.index'
-                }*/
+                } */
         }
     ]
 });

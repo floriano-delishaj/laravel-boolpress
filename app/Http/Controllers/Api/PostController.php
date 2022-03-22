@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use App\Traits\SlugGenerator;
 use Illuminate\Http\Request;
 
@@ -27,11 +29,17 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return response()->json([
+            'categories' => $categories,
+            'tags' => $tags
+        ]);
     }
 
     /**
