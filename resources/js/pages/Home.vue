@@ -1,5 +1,8 @@
 <template>
     <div class="container mt-5">
+        <div class="my-5" v-if="user">
+            <h3>Benvenuto {{user.name}}</h3>
+        </div>
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <TheCard v-for="post in posts" :key="post.id" :post="post"/>
         </div>
@@ -40,6 +43,7 @@ export default {
     },
     data() {
         return {
+            user: null,
             posts: [],
             pagination: {},
         }
@@ -59,10 +63,16 @@ export default {
             const res = await axios.get('/api/posts?page=' + page);
             this.pagination = res.data;
             this.posts = res.data.data;
+        },
+        getStoredUser() {
+            const storedUser = localStorage.getItem('user')
+
+            if(storedUser) {
+                this.user = JSON.parse(storedUser);
+            } else {
+                this.user = null;
+            }
         }
-    },
-    mounted() {
-        this.fetchPosts();
     },
     computed: {
         prevPage() {
@@ -71,7 +81,17 @@ export default {
         nextPage() {
             return this.pagination.current_page + 1
         }
-    }
+    },
+    mounted() {
+       this.getStoredUser();
+
+        window.addEventListener('storedUserChanged', () => {
+            this.getStoredUser();
+        })
+
+        this.fetchPosts();
+    },
+
 }
 </script>
 

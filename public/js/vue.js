@@ -1969,16 +1969,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 //
 //
 //
@@ -2007,7 +1997,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2016,36 +2009,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
-    fetchUser: function fetchUser() {
-      var _this = this;
+    getStoredUser: function getStoredUser() {
+      var storedUser = localStorage.getItem('user');
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/user');
-
-              case 2:
-                res = _context.sent;
-                _this.user = res.data;
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+      if (storedUser) {
+        this.user = JSON.parse(storedUser);
+      } else {
+        this.user = null;
+      }
     }
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.routes = this.$router.getRoutes().filter(function (route) {
       return route.meta.nameLinkNav;
     });
-    this.fetchUser();
+    this.getStoredUser();
+    window.addEventListener('storedUserChanged', function () {
+      _this.getStoredUser();
+    });
   }
 });
 
@@ -2149,6 +2132,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2157,6 +2143,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      user: null,
       posts: [],
       pagination: {}
     };
@@ -2197,10 +2184,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    getStoredUser: function getStoredUser() {
+      var storedUser = localStorage.getItem('user');
+
+      if (storedUser) {
+        this.user = JSON.parse(storedUser);
+      } else {
+        this.user = null;
+      }
     }
-  },
-  mounted: function mounted() {
-    this.fetchPosts();
   },
   computed: {
     prevPage: function prevPage() {
@@ -2209,6 +2202,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     nextPage: function nextPage() {
       return this.pagination.current_page + 1;
     }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.getStoredUser();
+    window.addEventListener('storedUserChanged', function () {
+      _this2.getStoredUser();
+    });
+    this.fetchPosts();
   }
 });
 
@@ -2298,12 +2300,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       categories: [],
-      tags: []
+      tags: [],
+      formPost: {
+        user_id: null,
+        title: '',
+        content: '',
+        slug: '',
+        category_id: '',
+        tags: [] //errore
+
+      },
+      errorsFormValidations: null
     };
   },
   methods: {
@@ -2324,13 +2342,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 res = _context.sent;
                 _this.categories = res.data.categories;
                 _this.tags = res.data.tags;
-                console.log(_this.categories);
-                console.log(_this.tags);
-                _context.next = 13;
+                _context.next = 11;
                 break;
 
-              case 10:
-                _context.prev = 10;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
 
                 _this.$router.replace({
@@ -2340,17 +2356,71 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 13:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 10]]);
+        }, _callee, null, [[0, 8]]);
       }))();
+    },
+    formSubmit: function formSubmit() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/posts/store', _this2.formPost);
+
+              case 3:
+                res = _context2.sent;
+                _context2.next = 9;
+                break;
+
+              case 6:
+                _context2.prev = 6;
+                _context2.t0 = _context2["catch"](0);
+
+                //422 errore di validazione
+                if (_context2.t0.response.status === 422) {
+                  _this2.errorsFormValidations = _context2.t0.response.data.errors;
+                }
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 6]]);
+      }))();
+    },
+    getStoredUser: function getStoredUser() {
+      var storedUser = localStorage.getItem('user');
+
+      if (storedUser) {
+        this.user = JSON.parse(storedUser);
+        this.formPost.user_id = this.user.id;
+      } else {
+        this.user = null;
+        this.$router.replace({
+          name: 'home.index'
+        });
+      }
     }
   },
   mounted: function mounted() {
+    var _this3 = this;
+
     this.getData();
+    this.getStoredUser();
+    window.addEventListener('storedUserChanged', function () {
+      _this3.getStoredUser();
+    });
   }
 });
 
@@ -2480,7 +2550,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_TheNavBar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/TheNavBar.vue */ "./resources/js/components/TheNavBar.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_TheNavBar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/TheNavBar.vue */ "./resources/js/components/TheNavBar.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2489,9 +2569,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    TheNavBar: _components_TheNavBar_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    TheNavBar: _components_TheNavBar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      user: null
+    };
+  },
+  methods: {
+    fetchUser: function fetchUser() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/user');
+
+              case 3:
+                res = _context.sent;
+                _this.user = res.data; // All'interno del localStorage, salviamo i dettagli dell'utente
+
+                localStorage.setItem('user', JSON.stringify(res.data)); // Per comunicare in tempo reale che l'utente loggato è cambiato,
+                // lanciamo un evento custom su window
+
+                window.dispatchEvent(new CustomEvent('storedUserChanged'));
+                _context.next = 13;
+                break;
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](0);
+                // Entriamo nel catch SOLO se l'utente non è loggato e il server ci ritorna
+                // un codice diverso da 200. Se non siamo loggati abbiamo un 401.
+                // Nel caso di errore, cancelliamo i dettagli dell'utente dal localStorage
+                localStorage.removeItem('user'); // Per comunicare in tempo reale che l'utente loggato è cambiato,
+                // lanciamo un evento custom su window
+
+                window.dispatchEvent(new CustomEvent('storedUserChanged'));
+
+              case 13:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 9]]);
+      }))();
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    window.addEventListener('storedUserChanged', function () {
+      _this2.getStoredUser();
+    });
+    this.fetchUser();
   }
 });
 
@@ -3892,7 +4031,36 @@ var render = function () {
                     )
                   }),
                   _vm._v(" "),
-                  _vm._m(1),
+                  !_vm.user
+                    ? _c("li", { staticClass: "nav-item" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { href: "/login" },
+                          },
+                          [_vm._v("Login")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { href: "/register" },
+                          },
+                          [_vm._v("Register")]
+                        ),
+                      ])
+                    : _c("li", { staticClass: "nav-item" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { href: "/admin" },
+                          },
+                          [_vm._v(_vm._s(_vm.user.name))]
+                        ),
+                      ]),
                 ],
                 2
               ),
@@ -3924,16 +4092,6 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "/login" } }, [
-        _vm._v("Admin"),
-      ]),
-    ])
   },
 ]
 render._withStripped = true
@@ -4015,6 +4173,12 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container mt-5" }, [
+    _vm.user
+      ? _c("div", { staticClass: "my-5" }, [
+          _c("h3", [_vm._v("Benvenuto " + _vm._s(_vm.user.name))]),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row row-cols-1 row-cols-md-2 g-4" },
@@ -4139,10 +4303,68 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
-            _c("form", { attrs: { action: "", method: "post" } }, [
-              _vm._m(0),
+            _c("div", [
+              _c("div", { staticClass: "mb-3" }, [
+                _c("label", [_vm._v("Titolo")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formPost.title,
+                      expression: "formPost.title",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "title",
+                    placeholder: "Inserisci il titolo",
+                    required: "",
+                  },
+                  domProps: { value: _vm.formPost.title },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.formPost, "title", $event.target.value)
+                    },
+                  },
+                }),
+              ]),
               _vm._v(" "),
-              _vm._m(1),
+              _c("div", { staticClass: "mb-3" }, [
+                _c("label", [_vm._v("Contenuto")]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formPost.content,
+                      expression: "formPost.content",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "content",
+                    rows: "10",
+                    placeholder: "Inizia a scrivere qualcosa...",
+                    required: "",
+                  },
+                  domProps: { value: _vm.formPost.content },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.formPost, "content", $event.target.value)
+                    },
+                  },
+                }),
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "mb-3" }, [
                 _c("label", [_vm._v("Categoria")]),
@@ -4150,8 +4372,35 @@ var render = function () {
                 _c(
                   "select",
                   {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.formPost.category_id,
+                        expression: "formPost.category_id",
+                      },
+                    ],
                     staticClass: "form-select",
                     attrs: { name: "category_id" },
+                    on: {
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.formPost,
+                          "category_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                    },
                   },
                   [
                     _c("option", { attrs: { value: "" } }, [
@@ -4190,18 +4439,66 @@ var render = function () {
                       { staticClass: "form-check form-check-inline" },
                       [
                         _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formPost.tags,
+                              expression: "formPost.tags",
+                            },
+                          ],
                           staticClass: "form-check-input",
                           attrs: {
                             type: "checkbox",
-                            id: tag.id,
+                            id: "tag_{{tag.id}}",
                             name: "tags[]",
                           },
-                          domProps: { value: tag.id },
+                          domProps: {
+                            value: tag.id,
+                            checked: Array.isArray(_vm.formPost.tags)
+                              ? _vm._i(_vm.formPost.tags, tag.id) > -1
+                              : _vm.formPost.tags,
+                          },
+                          on: {
+                            change: function ($event) {
+                              var $$a = _vm.formPost.tags,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = tag.id,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    _vm.$set(
+                                      _vm.formPost,
+                                      "tags",
+                                      $$a.concat([$$v])
+                                    )
+                                } else {
+                                  $$i > -1 &&
+                                    _vm.$set(
+                                      _vm.formPost,
+                                      "tags",
+                                      $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1))
+                                    )
+                                }
+                              } else {
+                                _vm.$set(_vm.formPost, "tags", $$c)
+                              }
+                            },
+                          },
                         }),
                         _vm._v(" "),
-                        _c("label", { staticClass: "form-check-label" }, [
-                          _vm._v(_vm._s(tag.name)),
-                        ]),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-check-label",
+                            attrs: { for: "tag_{{tag.id}}" },
+                          },
+                          [_vm._v(_vm._s(tag.name))]
+                        ),
                       ]
                     )
                   }),
@@ -4209,7 +4506,23 @@ var render = function () {
                 2
               ),
               _vm._v(" "),
-              _vm._m(2),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "a",
+                  { staticClass: "btn btn-secondary", attrs: { href: "" } },
+                  [_vm._v("Annulla")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "submit" },
+                    on: { click: _vm.formSubmit },
+                  },
+                  [_vm._v("Salva post")]
+                ),
+              ]),
             ]),
           ]),
         ]),
@@ -4217,60 +4530,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-3" }, [
-      _c("label", [_vm._v("Titolo")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          type: "text",
-          name: "title",
-          placeholder: "Inserisci il titolo",
-          required: "",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-3" }, [
-      _c("label", [_vm._v("Contenuto")]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: {
-          name: "content",
-          rows: "10",
-          placeholder: "Inizia a scrivere qualcosa...",
-          required: "",
-        },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("a", { staticClass: "btn btn-secondary", attrs: { href: "" } }, [
-        _vm._v("Annulla"),
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "submit" } },
-        [_vm._v("Salva post")]
-      ),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

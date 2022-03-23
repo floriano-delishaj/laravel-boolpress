@@ -16,8 +16,12 @@
                                     {{ route.meta.nameLinkNav }}
                                 </router-link>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/login">Admin</a>
+                            <li class="nav-item" v-if="!user">
+                                <a class="nav-link" href="/login">Login</a>
+                                <a class="nav-link" href="/register">Register</a>
+                            </li>
+                            <li class="nav-item" v-else>
+                                <a class="nav-link" href="/admin">{{ user.name }}</a>
                             </li>
                         </ul>
                     </div>
@@ -27,7 +31,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
     data() {
@@ -37,15 +40,25 @@ export default {
         }
     },
     methods: {
-        async fetchUser() {
-            const res = await axios.get('api/user')
-            this.user = res.data;
+        getStoredUser() {
+            const storedUser = localStorage.getItem('user')
+
+            if(storedUser) {
+                this.user = JSON.parse(storedUser);
+            } else {
+                this.user = null;
+            }
         }
     },
     mounted() {
         this.routes = this.$router.getRoutes().filter((route) => route.meta.nameLinkNav);
-        this.fetchUser()
-    }
+
+       this.getStoredUser();
+
+        window.addEventListener('storedUserChanged', () => {
+            this.getStoredUser();
+        })
+    },
 }
 </script>
 

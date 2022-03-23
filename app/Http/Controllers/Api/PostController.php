@@ -48,9 +48,10 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    /*public function store(Request $request)
+    public function store(Request $request)
     {
         $data = $request->validate([
+            "user_id" => 'required',
             "title" => "required|min:5",
             "content" => "required|min:10",
             "category_id" => 'nullable',
@@ -59,7 +60,7 @@ class PostController extends Controller
 
         $newPost = new Post();
         $newPost->fill($data);
-        $newPost->user_id = 4;
+        $newPost->user_id = $data['user_id'];
         $newPost->slug = $this->generateUniqueSlug($data['title']);
         $newPost->save();
 
@@ -68,7 +69,7 @@ class PostController extends Controller
         }
 
         return response()->json($newPost);
-    }*/
+    }
 
     /**
      * Display the specified resource.
