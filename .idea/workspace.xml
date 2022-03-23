@@ -4,17 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="add section Create.vue (bonus)">
+    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="fix post creation in vuejs with axios (bonus)">
+      <change afterPath="$PROJECT_DIR$/database/migrations/2022_03_23_093827_add_column_in_posts_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Post.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/vue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ExampleComponent.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/TheNavBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/TheNavBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/pages/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/pages/Home.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/pages/posts/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/pages/posts/Create.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/views/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/posts/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/posts/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/posts/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/posts/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/posts/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/posts/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +207,8 @@
       <workItem from="1647938177884" duration="4167000" />
       <workItem from="1647959671616" duration="8300000" />
       <workItem from="1647982221391" duration="7000" />
-      <workItem from="1648024086116" duration="338000" />
+      <workItem from="1648024086116" duration="2231000" />
+      <workItem from="1648027081713" duration="12557000" />
     </task>
     <task id="LOCAL-00001" summary="review function show in Admin/PostController and show.blade.php">
       <created>1647278532681</created>
@@ -292,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647941778819</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fix post creation in vuejs with axios (bonus)">
+      <created>1648024460110</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1648024460110</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,6 +333,7 @@
     <MESSAGE value="end tasks + bonus" />
     <MESSAGE value="done (21/03/2022) + all bonus" />
     <MESSAGE value="add section Create.vue (bonus)" />
-    <option name="LAST_COMMIT_MESSAGE" value="add section Create.vue (bonus)" />
+    <MESSAGE value="fix post creation in vuejs with axios (bonus)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix post creation in vuejs with axios (bonus)" />
   </component>
 </project>

@@ -9,6 +9,7 @@ use App\Traits\SlugGenerator;
 use App\Category;
 use App\Post;
 use App\Tag;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -52,6 +53,7 @@ class PostController extends Controller
         $data = $request->validate([
             "title" => "required|min:5",
             "content" => "required|min:10",
+            "path_img" => "nullable",
             "category_id" => 'nullable',
             "tags" => 'nullable',
         ]);
@@ -63,6 +65,11 @@ class PostController extends Controller
         $post->user_id = Auth::user()->id;
 
         $post->save();
+
+        if(key_exists('path_img', $data)) {
+            $post->path_img = Storage::put('postCovers', $data['path_img']);
+            $post->save();
+        }
 
         if(key_exists("tags", $data)) {
             $post->tags()->attach($data['tags']);
@@ -115,6 +122,7 @@ class PostController extends Controller
         $data = $request->validate([
             "title" => "required|min:5",
             "content" => "required|min:10",
+            "path_img" => "nullable",
             "category_id" => 'nullable',
             "tags" => "nullable|exists:tags,id"
         ]);
@@ -126,6 +134,15 @@ class PostController extends Controller
         }
 
         $post->update($data);
+
+        if (key_exists('path_img', $data)) {
+            if ($post->path_img) {
+                Storage::delete($post->path_img);
+            }
+
+            $post->path_img = Storage::put('postCovers', $data['path_img']);
+            $post->save();
+        }
 
         if(key_exists("tags", $data)) {
             $post->tags()->sync($data['tags']);
@@ -145,6 +162,9 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->tags()->detach();
+        if ($post->path_img) {
+            Storage::delete($post->path_img);
+        }
         $post->delete();
 
         return redirect()->route('admin.posts.index');

@@ -8,6 +8,7 @@ use App\Post;
 use App\Tag;
 use App\Traits\SlugGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -22,6 +23,13 @@ class PostController extends Controller
         $posts = Post::paginate(6);
 
         $posts->load('user','category', 'tags');
+
+        $posts->each( function ($post) {
+            //se il post ha un path_img allora sostituisco il valore con l'url completo per quell'immagine
+            if($post->path_img) {
+                $post->path_img = asset("storage/" . $post->path_img);
+            }
+        });
 
         return response()->json($posts);
     }
@@ -54,6 +62,7 @@ class PostController extends Controller
             "user_id" => 'required',
             "title" => "required|min:5",
             "content" => "required|min:10",
+            "path_img" => "nullable",
             "category_id" => 'nullable',
             "tags" => "nullable|exists:tags,id"
         ]);
@@ -62,6 +71,11 @@ class PostController extends Controller
         $newPost->fill($data);
         $newPost->user_id = $data['user_id'];
         $newPost->slug = $this->generateUniqueSlug($data['title']);
+
+        if(key_exists("path_img", $data)) {
+            $newPost->path_img = Storage::put('postCoversVueJs', $data['path_img']);
+        }
+
         $newPost->save();
 
         if(key_exists('tags', $data)) {

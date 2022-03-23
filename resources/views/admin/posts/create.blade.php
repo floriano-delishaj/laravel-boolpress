@@ -11,7 +11,7 @@
 
                     <div class="card-body">
 
-                        <form action="{{ route('admin.posts.store') }}" method="post">
+                        <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                             {{-- titolo --}}
@@ -21,6 +21,16 @@
                                        class="form-control @error('title') is-invalid @enderror"
                                        placeholder="Inserisci il titolo" value="{{ old('title') }}" required>
                                 @error('title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Carica file</label>
+                                <input type="file" name="path_img"
+                                       class="form-control @error('path_img') is-invalid @enderror"
+                                       placeholder="Inserisci file">
+                                @error('path_img')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

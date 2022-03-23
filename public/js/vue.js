@@ -2306,6 +2306,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2316,10 +2327,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         user_id: null,
         title: '',
         content: '',
+        img_path: null,
         slug: '',
         category_id: '',
-        tags: [] //errore
-
+        tags: []
       },
       errorsFormValidations: null
     };
@@ -2368,22 +2379,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var res;
+        var formDataInstance, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/posts/store', _this2.formPost);
+                formDataInstance = new FormData();
+                formDataInstance.append("user_id", _this2.formPost.user_id);
+                formDataInstance.append("title", _this2.formPost.title);
+                formDataInstance.append("content", _this2.formPost.content);
+                formDataInstance.append("img_path", _this2.formPost.img_path);
+                formDataInstance.append("slug", _this2.formPost.slug);
+                formDataInstance.append("category_id", _this2.formPost.category_id);
+                formDataInstance.append("tags", _this2.formPost.tags);
+                _context2.next = 11;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/posts/store', formDataInstance);
 
-              case 3:
+              case 11:
                 res = _context2.sent;
-                _context2.next = 9;
+                _context2.next = 17;
                 break;
 
-              case 6:
-                _context2.prev = 6;
+              case 14:
+                _context2.prev = 14;
                 _context2.t0 = _context2["catch"](0);
 
                 //422 errore di validazione
@@ -2391,12 +2410,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.errorsFormValidations = _context2.t0.response.data.errors;
                 }
 
-              case 9:
+              case 17:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 6]]);
+        }, _callee2, null, [[0, 14]]);
       }))();
     },
     getStoredUser: function getStoredUser() {
@@ -2411,6 +2430,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           name: 'home.index'
         });
       }
+    },
+    onAttachmentChange: function onAttachmentChange(event) {
+      // console.log(event)
+      this.formPost.img_path = event.target.files[0];
     }
   },
   mounted: function mounted() {
@@ -2625,11 +2648,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
-
-    window.addEventListener('storedUserChanged', function () {
-      _this2.getStoredUser();
-    });
     this.fetchUser();
   }
 });
@@ -4332,6 +4350,20 @@ var render = function () {
                       _vm.$set(_vm.formPost, "title", $event.target.value)
                     },
                   },
+                }),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-3" }, [
+                _c("label", [_vm._v("Carica file")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "file",
+                    name: "img_path",
+                    placeholder: "Allega file",
+                  },
+                  on: { change: _vm.onAttachmentChange },
                 }),
               ]),
               _vm._v(" "),

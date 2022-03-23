@@ -9,7 +9,6 @@
 import TheNavBar from "../components/TheNavBar.vue";
 import axios from "axios";
 
-
 export default {
     components: {
         TheNavBar,
@@ -43,9 +42,6 @@ export default {
     },
     mounted() {
 
-        window.addEventListener('storedUserChanged', () => {
-            this.getStoredUser();
-        })
         this.fetchUser()
     }
 };

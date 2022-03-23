@@ -22,6 +22,11 @@
                                     @else <p>Modificato <i>{{$post->updated_at->format('d/m/Y H:i')}}</i></p>
                                 @endif
                             </li>
+                            @if($post->path_img)
+                            <li class="list-group-item">
+                                <img class="img-fluid" src="{{asset("storage/" . $post->path_img)}}" alt="">
+                            </li>
+                            @endif
                             @if ($post->category !== null)
                             <li class="list-group-item">
                                 Categoria: <span class="badge bg-danger text-white mx-1 mb-3">{{$post->category->name}}</span>

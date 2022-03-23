@@ -16,7 +16,18 @@
                                 <input type="text" name="title"
                                        class="form-control"
                                        v-model="formPost.title"
-                                       placeholder="Inserisci il titolo" required>
+                                       placeholder="Inserisci il titolo" required
+                                >
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Carica file</label>
+                                <input type="file"
+                                       name="img_path"
+                                       class="form-control"
+                                       @change="onAttachmentChange"
+                                       placeholder="Allega file"
+                                >
                             </div>
 
                             <div class="mb-3">
@@ -82,9 +93,10 @@ export default {
                     user_id: null,
                     title: '',
                     content: '',
+                    img_path: null,
                     slug: '',
                     category_id: '',
-                    tags : [],  //errore
+                    tags : [],
                 },
             errorsFormValidations: null,
         }
@@ -101,7 +113,16 @@ export default {
         },
        async formSubmit() {
             try {
-                const res = await axios.post('/api/posts/store', this.formPost);
+                const formDataInstance = new FormData();
+                formDataInstance.append("user_id", this.formPost.user_id)
+                formDataInstance.append("title", this.formPost.title)
+                formDataInstance.append("content", this.formPost.content)
+                formDataInstance.append("img_path", this.formPost.img_path)
+                formDataInstance.append("slug", this.formPost.slug)
+                formDataInstance.append("category_id", this.formPost.category_id)
+                formDataInstance.append("tags", this.formPost.tags)
+
+                const res = await axios.post('/api/posts/store', formDataInstance);
             } catch (error) {
                 //422 errore di validazione
                 if (error.response.status === 422) {
@@ -119,6 +140,10 @@ export default {
                this.user = null;
                this.$router.replace( { name: 'home.index',})
            }
+       },
+       onAttachmentChange(event) {
+            // console.log(event)
+           this.formPost.img_path = event.target.files[0];
        }
     },
     mounted() {
