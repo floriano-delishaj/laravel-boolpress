@@ -10,6 +10,10 @@
 
                         <div class="card-body">
                             {{ post.content }}
+                            <hr>
+                            <img class="img-fluid"
+                                 :src="post.path_img"
+                                 alt="">
                         </div>
                         <div class="card-footer d-flex justify-content-between">
                             <div>

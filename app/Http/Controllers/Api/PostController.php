@@ -62,7 +62,7 @@ class PostController extends Controller
             "user_id" => 'required',
             "title" => "required|min:5",
             "content" => "required|min:10",
-            "path_img" => "nullable",
+            "path_img" => "nullable|file",
             "category_id" => 'nullable',
             "tags" => "nullable|exists:tags,id"
         ]);
@@ -99,6 +99,9 @@ class PostController extends Controller
 
         // $post->load('user','category','tags');
         // fa la stessa cosa del with
+        if($post->path_img) {
+            $post->path_img = asset("storage/" . $post->path_img);
+        }
 
         if (!$post) {
             abort(404);

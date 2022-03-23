@@ -2327,7 +2327,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         user_id: null,
         title: '',
         content: '',
-        img_path: null,
+        path_img: null,
         slug: '',
         category_id: '',
         tags: []
@@ -2389,7 +2389,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formDataInstance.append("user_id", _this2.formPost.user_id);
                 formDataInstance.append("title", _this2.formPost.title);
                 formDataInstance.append("content", _this2.formPost.content);
-                formDataInstance.append("img_path", _this2.formPost.img_path);
+                formDataInstance.append("path_img", _this2.formPost.img_path);
                 formDataInstance.append("slug", _this2.formPost.slug);
                 formDataInstance.append("category_id", _this2.formPost.category_id);
                 formDataInstance.append("tags", _this2.formPost.tags);
@@ -2468,6 +2468,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -4360,7 +4364,7 @@ var render = function () {
                   staticClass: "form-control",
                   attrs: {
                     type: "file",
-                    name: "img_path",
+                    name: "path_img",
                     placeholder: "Allega file",
                   },
                   on: { change: _vm.onAttachmentChange },
@@ -4482,7 +4486,7 @@ var render = function () {
                           staticClass: "form-check-input",
                           attrs: {
                             type: "checkbox",
-                            id: "tag_{{tag.id}}",
+                            id: "tag_" + tag.id,
                             name: "tags[]",
                           },
                           domProps: {
@@ -4527,7 +4531,7 @@ var render = function () {
                           "label",
                           {
                             staticClass: "form-check-label",
-                            attrs: { for: "tag_{{tag.id}}" },
+                            attrs: { for: "tag_" + tag.id },
                           },
                           [_vm._v(_vm._s(tag.name))]
                         ),
@@ -4597,8 +4601,14 @@ var render = function () {
               _vm._v(
                 "\n                        " +
                   _vm._s(_vm.post.content) +
-                  "\n                    "
+                  "\n                        "
               ),
+              _c("hr"),
+              _vm._v(" "),
+              _c("img", {
+                staticClass: "img-fluid",
+                attrs: { src: _vm.post.path_img, alt: "" },
+              }),
             ]),
             _vm._v(" "),
             _c(

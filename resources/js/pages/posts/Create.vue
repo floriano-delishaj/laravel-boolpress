@@ -23,7 +23,7 @@
                             <div class="mb-3">
                                 <label>Carica file</label>
                                 <input type="file"
-                                       name="img_path"
+                                       name="path_img"
                                        class="form-control"
                                        @change="onAttachmentChange"
                                        placeholder="Allega file"
@@ -56,11 +56,11 @@
                                     <input class="form-check-input"
                                            type="checkbox"
                                            :value="tag.id"
-                                           :id="`tag_{{tag.id}}`"
+                                           :id="`tag_${tag.id}`"
                                            v-model="formPost.tags"
                                            name="tags[]"
                                     >
-                                    <label :for="`tag_{{tag.id}}`" class="form-check-label">{{ tag.name }}</label>
+                                    <label :for="`tag_${tag.id}`" class="form-check-label">{{ tag.name }}</label>
                                 </div>
 
                             </div>
@@ -93,7 +93,7 @@ export default {
                     user_id: null,
                     title: '',
                     content: '',
-                    img_path: null,
+                    path_img: null,
                     slug: '',
                     category_id: '',
                     tags : [],
@@ -117,7 +117,7 @@ export default {
                 formDataInstance.append("user_id", this.formPost.user_id)
                 formDataInstance.append("title", this.formPost.title)
                 formDataInstance.append("content", this.formPost.content)
-                formDataInstance.append("img_path", this.formPost.img_path)
+                formDataInstance.append("path_img", this.formPost.img_path)
                 formDataInstance.append("slug", this.formPost.slug)
                 formDataInstance.append("category_id", this.formPost.category_id)
                 formDataInstance.append("tags", this.formPost.tags)

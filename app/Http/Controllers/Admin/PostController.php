@@ -136,7 +136,8 @@ class PostController extends Controller
         $post->update($data);
 
         if (key_exists('path_img', $data)) {
-            if ($post->path_img) {
+
+            if($post->path_img){
                 Storage::delete($post->path_img);
             }
 
