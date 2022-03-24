@@ -46,14 +46,14 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
         $data = $request->validate([
             "title" => "required|min:5",
             "content" => "required|min:10",
-            "path_img" => "nullable",
+            "path_img" => "nullable|mimes:png,jpg,jpeg",
             "category_id" => 'nullable',
             "tags" => 'nullable',
         ]);
@@ -82,7 +82,7 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show($slug)
     {
@@ -115,7 +115,7 @@ class PostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $slug)
     {
@@ -136,7 +136,6 @@ class PostController extends Controller
         $post->update($data);
 
         if (key_exists('path_img', $data)) {
-
             if($post->path_img){
                 Storage::delete($post->path_img);
             }
@@ -158,14 +157,16 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Post $post)
     {
         $post->tags()->detach();
+
         if ($post->path_img) {
             Storage::delete($post->path_img);
         }
+
         $post->delete();
 
         return redirect()->route('admin.posts.index');

@@ -12,7 +12,7 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         {
-          path: '/home',
+          path: '/',
             component: Home,
             name: 'home.index',
             meta:

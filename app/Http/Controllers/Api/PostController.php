@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Mail\NewPostCreateMail;
 use App\Post;
 use App\Tag;
 use App\Traits\SlugGenerator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -54,12 +57,11 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
         $data = $request->validate([
-            "user_id" => 'required',
             "title" => "required|min:5",
             "content" => "required|min:10",
             "path_img" => "nullable|file",
@@ -69,7 +71,7 @@ class PostController extends Controller
 
         $newPost = new Post();
         $newPost->fill($data);
-        $newPost->user_id = $data['user_id'];
+        $newPost->user_id = Auth::user()->id;
         $newPost->slug = $this->generateUniqueSlug($data['title']);
 
         if(key_exists("path_img", $data)) {
@@ -81,6 +83,7 @@ class PostController extends Controller
         if(key_exists('tags', $data)) {
             $newPost->tags()->attach($data['tags']);
         }
+        Mail::to('admin@gmail.com')->send(new NewPostCreateMail($newPost));
 
         return response()->json($newPost);
     }

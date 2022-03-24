@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-5">
-        <div class="row justify-content-center">
+        <div v-if="!formSubmitted" class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header d-flex">
@@ -18,6 +18,13 @@
                                        v-model="formPost.title"
                                        placeholder="Inserisci il titolo" required
                                 >
+
+                                <span class="invalid-feedback"
+                                      v-if="errorsFormValidations && errorsFormValidations.title"
+                                >
+                                    <span v-for="errors in errorsFormValidations.title">{{errors}}</span>
+                                </span>
+
                             </div>
 
                             <div class="mb-3">
@@ -28,6 +35,13 @@
                                        @change="onAttachmentChange"
                                        placeholder="Allega file"
                                 >
+
+                                <span class="invalid-feedback"
+                                      v-if="errorsFormValidations && errorsFormValidations.path_img"
+                                >
+                                    <span v-for="errors in errorsFormValidations.path_img">{{errors}}</span>
+                                </span>
+
                             </div>
 
                             <div class="mb-3">
@@ -36,7 +50,15 @@
                                           class="form-control"
                                           v-model="formPost.content"
                                           placeholder="Inizia a scrivere qualcosa..."
-                                          required></textarea>
+                                          required>
+                                </textarea>
+
+                                <span class="invalid-feedback"
+                                      v-if="errorsFormValidations && errorsFormValidations.content"
+                                >
+                                    <span v-for="errors in errorsFormValidations.content">{{errors}}</span>
+                                </span>
+
                             </div>
 
                             <div class="mb-3">
@@ -48,6 +70,13 @@
                                         {{ category.name }}
                                     </option>
                                 </select>
+
+                                <span class="invalid-feedback"
+                                      v-if="errorsFormValidations && errorsFormValidations.category_id"
+                                >
+                                    <span v-for="errors in errorsFormValidations.category_id">{{errors}}</span>
+                                </span>
+
                             </div>
 
                             <div class="mb-3">
@@ -61,12 +90,19 @@
                                            name="tags[]"
                                     >
                                     <label :for="`tag_${tag.id}`" class="form-check-label">{{ tag.name }}</label>
+
+                                    <span class="invalid-feedback"
+                                          v-if="errorsFormValidations && errorsFormValidations.tags"
+                                    >
+                                    <span v-for="errors in errorsFormValidations.tags">{{errors}}</span>
+                                </span>
+
                                 </div>
 
                             </div>
 
                             <div class="form-group">
-                                <a href="" class="btn btn-secondary">Annulla</a>
+                                <router-link to="/" class="btn btn-secondary">Annulla</router-link>
                                 <button type="submit"
                                         class="btn btn-success"
                                         @click="formSubmit"
@@ -76,6 +112,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div v-else class="alert alert-success py-5">
+            <h4>Un nuovo post è stato creato.</h4>
+            <p class="lead">
+                Il <strong>post</strong> è stato creato con successo, sarei reindirizzato a breve.
+            </p>
         </div>
     </div>
 </template>
@@ -98,6 +141,7 @@ export default {
                     category_id: '',
                     tags : [],
                 },
+            formSubmitted: false,
             errorsFormValidations: null,
         }
     },
@@ -108,21 +152,36 @@ export default {
                 this.categories = res.data.categories;
                 this.tags = res.data.tags;
             } catch (error) {
-                this.$router.replace({name: 'error', params: {message: error.message}})
+                    this.$router.replace({name: 'error', params: {message: error.message}})
             }
         },
        async formSubmit() {
             try {
+                this.errorsFormValidations = null;
+
                 const formDataInstance = new FormData();
                 formDataInstance.append("user_id", this.formPost.user_id)
                 formDataInstance.append("title", this.formPost.title)
                 formDataInstance.append("content", this.formPost.content)
-                formDataInstance.append("path_img", this.formPost.img_path)
                 formDataInstance.append("slug", this.formPost.slug)
                 formDataInstance.append("category_id", this.formPost.category_id)
-                formDataInstance.append("tags", this.formPost.tags)
+
+                for (let i = 0; i < this.formPost.tags.length; i++)
+                {
+                    formDataInstance.append("tags[]", this.formPost.tags[i])
+                }
+
+                if (this.formPost.path_img)
+                {
+                    formDataInstance.append("path_img", this.formPost.img_path)
+                }
 
                 const res = await axios.post('/api/posts/store', formDataInstance);
+                this.formSubmitted = true;
+
+                setTimeout(() => {
+                    this.$router.replace({name: 'home.index'});
+                }, 1000);
             } catch (error) {
                 //422 errore di validazione
                 if (error.response.status === 422) {

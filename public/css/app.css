@@ -12178,3 +12178,7 @@ fieldset:disabled .btn {
   }
 }
 
+.invalid-feedback {
+  display: block;
+}
+
