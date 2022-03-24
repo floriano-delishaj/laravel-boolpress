@@ -64,7 +64,7 @@ class PostController extends Controller
         $data = $request->validate([
             "title" => "required|min:5",
             "content" => "required|min:10",
-            "path_img" => "nullable|file",
+            "path_img" => "nullable|mimes:png,jpg,jpeg",
             "category_id" => 'nullable',
             "tags" => "nullable|exists:tags,id"
         ]);
@@ -83,7 +83,10 @@ class PostController extends Controller
         if(key_exists('tags', $data)) {
             $newPost->tags()->attach($data['tags']);
         }
-        Mail::to('admin@gmail.com')->send(new NewPostCreateMail($newPost));
+
+        $newPost->load('user');
+        Mail::to('admin@gmail.com')
+            ->send(new NewPostCreateMail($newPost));
 
         return response()->json($newPost);
     }

@@ -166,14 +166,11 @@ export default {
                 formDataInstance.append("slug", this.formPost.slug)
                 formDataInstance.append("category_id", this.formPost.category_id)
 
+                    formDataInstance.append("path_img", this.formPost.img_path)
+
                 for (let i = 0; i < this.formPost.tags.length; i++)
                 {
                     formDataInstance.append("tags[]", this.formPost.tags[i])
-                }
-
-                if (this.formPost.path_img)
-                {
-                    formDataInstance.append("path_img", this.formPost.img_path)
                 }
 
                 const res = await axios.post('/api/posts/store', formDataInstance);
@@ -201,7 +198,7 @@ export default {
            }
        },
        onAttachmentChange(event) {
-            // console.log(event)
+            console.log(event)
            this.formPost.img_path = event.target.files[0];
        }
     },

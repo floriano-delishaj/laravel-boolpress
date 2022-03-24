@@ -4,21 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="fix Create.vue">
-      <change afterPath="$PROJECT_DIR$/app/Mail/NewPostCreateMail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2022_03_24_112256_add_softdeletes_in_posts_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mails/newPostCreateMail.blade.php" afterDir="false" />
+    <list default="true" id="1eebe1f0-a104-4d0d-9cff-733056b88d84" name="Changes" comment="fix Create.vue and send email when the user create a new post">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mail/NewPostCreateMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/NewPostCreateMail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_03_24_112256_add_softdeletes_in_posts_table.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/vue.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/TheNavBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/TheNavBar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/pages/posts/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/pages/posts/Create.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mails/newPostCreateMail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mails/newPostCreateMail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +209,10 @@
       <workItem from="1648027081713" duration="21058000" />
       <workItem from="1648053588135" duration="2488000" />
       <workItem from="1648110813615" duration="7835000" />
-      <workItem from="1648132806274" duration="6858000" />
+      <workItem from="1648132806274" duration="10449000" />
+      <workItem from="1648143815832" duration="1499000" />
+      <workItem from="1648147283766" duration="337000" />
+      <workItem from="1648150615207" duration="4171000" />
     </task>
     <task id="LOCAL-00001" summary="review function show in Admin/PostController and show.blade.php">
       <created>1647278532681</created>
@@ -321,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648053172957</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fix Create.vue and send email when the user create a new post">
+      <created>1648140148140</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1648140148140</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,6 +361,7 @@
     <MESSAGE value="fix post creation in vuejs with axios (bonus)" />
     <MESSAGE value="review Create.vue, send file with api doesn't work (NULL) in db" />
     <MESSAGE value="fix Create.vue" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix Create.vue" />
+    <MESSAGE value="fix Create.vue and send email when the user create a new post" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix Create.vue and send email when the user create a new post" />
   </component>
 </project>

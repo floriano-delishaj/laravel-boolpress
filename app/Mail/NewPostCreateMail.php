@@ -29,6 +29,7 @@ class NewPostCreateMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Nuovo post')->view('mails.newPostCreateMail');
+        return $this->subject($this->newPostInfo->user->name . ' ha creato il post #' . $this->newPostInfo->id)
+            ->view('mails.newPostCreateMail');
     }
 }

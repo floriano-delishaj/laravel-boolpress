@@ -8,6 +8,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Nuovo post creato</h1>
+    <div class="container d-flex justify-content-center align-content-center bg-light">
+        <h1>Nuovo post creato!</h1>
+        <p class="pt-5"><strong>{{$newPostInfo->user->name}}</strong> ha creato un nuovo post!</p>
+        <p>La sua email è: <strong>{{$newPostInfo->user->email}}</strong></p>
+        <p>Il titolo del post è <strong>{{$newPostInfo->title}}</strong></p>
+        <p class="pt-5">Per leggere il post recati sul sito !</p>
+    </div>
 </body>
 </html>
