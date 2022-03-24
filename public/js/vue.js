@@ -1969,6 +1969,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2017,17 +2030,49 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.user = null;
       }
+    },
+    logoutUser: function logoutUser() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('api/logout');
+
+              case 2:
+                res = _context.sent;
+                _this.user = null;
+                localStorage.removeItem('user');
+                window.dispatchEvent(new CustomEvent('storedUserChanged'));
+
+                _this.$router.replace({
+                  name: 'home.index'
+                });
+
+                window.location.reload();
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     this.routes = this.$router.getRoutes().filter(function (route) {
       return route.meta.nameLinkNav;
     });
     this.getStoredUser();
     window.addEventListener('storedUserChanged', function () {
-      _this.getStoredUser();
+      _this2.getStoredUser();
     });
   }
 });
@@ -2436,13 +2481,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 formDataInstance.append("content", _this2.formPost.content);
                 formDataInstance.append("slug", _this2.formPost.slug);
                 formDataInstance.append("category_id", _this2.formPost.category_id);
+                formDataInstance.append("path_img", _this2.formPost.img_path);
 
                 for (i = 0; i < _this2.formPost.tags.length; i++) {
                   formDataInstance.append("tags[]", _this2.formPost.tags[i]);
-                }
-
-                if (_this2.formPost.path_img) {
-                  formDataInstance.append("path_img", _this2.formPost.img_path);
                 }
 
                 _context2.next = 12;
@@ -2490,7 +2532,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     onAttachmentChange: function onAttachmentChange(event) {
-      // console.log(event)
+      console.log(event);
       this.formPost.img_path = event.target.files[0];
     }
   },
@@ -4121,7 +4163,11 @@ var render = function () {
                           },
                           [_vm._v("Login")]
                         ),
-                        _vm._v(" "),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.user
+                    ? _c("li", { staticClass: "nav-item" }, [
                         _c(
                           "a",
                           {
@@ -4131,7 +4177,10 @@ var render = function () {
                           [_vm._v("Register")]
                         ),
                       ])
-                    : _c("li", { staticClass: "nav-item" }, [
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.user
+                    ? _c("li", { staticClass: "nav-item" }, [
                         _c(
                           "a",
                           {
@@ -4140,7 +4189,21 @@ var render = function () {
                           },
                           [_vm._v(_vm._s(_vm.user.name))]
                         ),
-                      ]),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.user
+                    ? _c("li", { staticClass: "nav-item" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "nav-link",
+                            on: { click: _vm.logoutUser },
+                          },
+                          [_vm._v("Logout")]
+                        ),
+                      ])
+                    : _vm._e(),
                 ],
                 2
               ),

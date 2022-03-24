@@ -18,10 +18,15 @@
                             </li>
                             <li class="nav-item" v-if="!user">
                                 <a class="nav-link" href="/login">Login</a>
+                            </li>
+                            <li class="nav-item" v-if="!user">
                                 <a class="nav-link" href="/register">Register</a>
                             </li>
-                            <li class="nav-item" v-else>
+                            <li class="nav-item" v-if="user">
                                 <a class="nav-link" href="/admin">{{ user.name }}</a>
+                            </li>
+                            <li class="nav-item" v-if="user">
+                                <a class="nav-link" @click="logoutUser">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -48,6 +53,14 @@ export default {
             } else {
                 this.user = null;
             }
+        },
+        async logoutUser() {
+            const res = await axios.get('api/logout');
+            this.user = null;
+            localStorage.removeItem('user');
+            window.dispatchEvent(new CustomEvent('storedUserChanged'));
+            this.$router.replace({name: 'home.index'});
+            window.location.reload();
         }
     },
     mounted() {
