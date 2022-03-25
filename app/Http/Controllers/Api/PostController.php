@@ -62,7 +62,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            "title" => "required|min:5",
+            "title" => "required|min:5|max:120",
             "content" => "required|min:10",
             "path_img" => "nullable|mimes:png,jpg,jpeg",
             "category_id" => 'nullable',

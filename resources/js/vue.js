@@ -1,3 +1,4 @@
+import Vue from "vue";
 
 window.Vue = require('vue');
 
@@ -21,6 +22,12 @@ window.Vue = require('vue');
  */
 import App from './views/App.vue';
 import router from './router';
+import { ValidationProvider } from "vee-validate/dist/vee-validate.full.esm";
+import { ValidationObserver } from "vee-validate";
+
+Vue.component('ValidationObserver', ValidationObserver);
+Vue.component('ValidationProvider', ValidationProvider);
+
 // se router fosse una variabile avremmo dovuto fare import {router} from './router';
 
 const app = new Vue({
